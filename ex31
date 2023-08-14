@@ -1,0 +1,28 @@
+import pandas as pd
+import numpy as np
+
+def calculate_most_consistent_city(std_deviations):
+    return std_deviations.idxmin()
+
+# Create a DataFrame from provided city names and temperature values
+data = {'City': ['chennai', 'pondy', 'trichy', 'goa', 'kanya'],
+        'Temperature': [10, 12, 15, 20, 25]}
+
+temperature_df = pd.DataFrame(data)
+
+# Calculate statistics for each city
+city_stats = temperature_df.groupby('City')['Temperature'].agg([np.mean, np.std, np.ptp])
+
+# Determine city with highest temperature range
+highest_range_city = city_stats['ptp'].idxmax()
+
+# Find city with most consistent temperature
+most_consistent_city = calculate_most_consistent_city(city_stats['std'])
+
+# Display results
+print("Temperature Analysis for Cities")
+print("--------------------------------")
+print(city_stats)
+print()
+print(f"City with the Highest Temperature Range: {highest_range_city}")
+print(f"City with the Most Consistent Temperature: {most_consistent_city}")
