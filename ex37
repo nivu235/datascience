@@ -1,0 +1,18 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+df = pd.read_csv('exam.csv')
+correlation = df['study_time'].corr(df['exam_score'])
+print(f'Correlation coefficient: {correlation}')
+plt.figure(figsize=(8, 6))
+plt.scatter(df['study_time'], df['exam_score'], alpha=0.5)
+plt.title('Scatter Plot of Study Time vs. Exam Score')
+plt.xlabel('Study Time (hours)')
+plt.ylabel('Exam Score')
+plt.grid(True)
+plt.show()
+sns.jointplot(x='study_time', y='exam_score', data=df, kind='reg')
+plt.show()
+sns.pairplot(df)
+plt.show()
