@@ -1,0 +1,29 @@
+# Import necessary libraries
+from sklearn.datasets import load_iris
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import train_test_split
+
+# Load the Iris dataset
+iris = load_iris()
+X = iris.data
+y = iris.target
+
+# Create and train the Decision Tree classifier
+classifier = DecisionTreeClassifier(random_state=42)
+classifier.fit(X, y)
+
+# Collect user input
+sepal_length = float(input("Enter sepal length (in cm): "))
+sepal_width = float(input("Enter sepal width (in cm): "))
+petal_length = float(input("Enter petal length (in cm): "))
+petal_width = float(input("Enter petal width (in cm): "))
+
+# Make predictions based on user input
+new_flower_data = [[sepal_length, sepal_width, petal_length, petal_width]]
+prediction = classifier.predict(new_flower_data)
+
+# Map predicted label to species name
+species_names = iris.target_names
+predicted_species = species_names[prediction[0]]
+
+print(f"The predicted species of the new flower is: {predicted_species}")
