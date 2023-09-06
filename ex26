@@ -1,0 +1,32 @@
+# Import necessary libraries
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
+# Sample dataset (Replace this with your actual dataset)
+# For this example, we use two features: area (in square feet) and number of bedrooms.
+# The target variable is the price (in dollars).
+data = [
+    (1400, 3, 210000),
+    (1600, 3, 230000),
+    (1700, 3, 245000),
+    (1875, 2, 280000),
+    (1100, 2, 180000),
+]
+
+# Separate features (X) and the target variable (y)
+X = np.array([(area, bedrooms) for area, bedrooms, _ in data])
+y = np.array([price for _, _, price in data])
+
+# Create and train the Linear Regression model
+regressor = LinearRegression()
+regressor.fit(X, y)
+
+# Collect user input
+area = float(input("Enter the area of the new house (in square feet): "))
+bedrooms = int(input("Enter the number of bedrooms in the new house: "))
+
+# Make predictions based on user input
+new_house_data = np.array([[area, bedrooms]])
+predicted_price = regressor.predict(new_house_data)
+
+print(f"The predicted price of the new house is: ${predicted_price[0]:.2f}")
